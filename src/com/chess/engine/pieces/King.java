@@ -1,6 +1,7 @@
 package com.chess.engine.pieces;
 
-import static com.chess.engine.board.Move.*;
+import static com.chess.engine.board.Move.AttackMove;
+import static com.chess.engine.board.Move.MajorMove;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,11 +29,11 @@ public class King extends Piece {
     for (int currentCandidateOffset : CANDIDATE_MOVE_VECTOR_COORDINATES) {
       final int candidateDestinationCoordinate = this.piecePosition + currentCandidateOffset;
 
-      if(isFirstColumnExclusion(piecePosition, currentCandidateOffset) || isEighthColumnExclusion(piecePosition, currentCandidateOffset)){
+      if (isFirstColumnExclusion(piecePosition, currentCandidateOffset) || isEighthColumnExclusion(piecePosition, currentCandidateOffset)) {
         continue;
       }
 
-      if(BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)){
+      if (BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)) {
         Tile candidateDestinationTile = board.getTile(candidateDestinationCoordinate);
         if (!candidateDestinationTile.isTileOccupied()) {
           legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));
@@ -56,6 +57,10 @@ public class King extends Piece {
 
   private static boolean isEighthColumnExclusion(final int currentPosition, final int candidateOffset) {
     return BoardUtils.SECOND_COLUMN[currentPosition] && (candidateOffset == -7 || candidateOffset == 1 || candidateOffset == 9);
+  }
+
+  @Override public String toString() {
+    return PieceType.KING.toString();
   }
 
 }

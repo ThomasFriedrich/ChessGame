@@ -59,4 +59,7 @@ public class Bishop extends Piece {
     return BoardUtils.EIGHTH_COLUMN[currentPosition] && (candidateOffset == 9 || candidateOffset == -7);
   }
 
+  @Override public String toString() {
+    return PieceType.BISHOP.toString();
+  }
 }
