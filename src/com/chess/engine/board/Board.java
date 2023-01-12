@@ -1,8 +1,122 @@
 package com.chess.engine.board;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.chess.engine.Allience;
+import com.chess.engine.pieces.Bishop;
+import com.chess.engine.pieces.King;
+import com.chess.engine.pieces.Knight;
+import com.chess.engine.pieces.Pawn;
+import com.chess.engine.pieces.Piece;
+import com.chess.engine.pieces.Queen;
+import com.chess.engine.pieces.Rock;
+import com.google.common.collect.ImmutableList;
+
 public class Board {
 
-  public Tile getTile(final int tileCoordinate){
-    return null;
+  private final List<Tile> gameBoard;
+  private final Collection<Piece> whitePieces;
+  private final Collection<Piece> blackPieces;
+
+  private Board(Builder builder) {
+
+    gameBoard = createGameBoard(builder);
+    blackPieces = calculateActivePieces(this.gameBoard, Allience.WHITE);
+    whitePieces = calculateActivePieces(this.gameBoard, Allience.BLACK);
+    ;
   }
+
+  private static Collection<Piece> calculateActivePieces(List<Tile> gameBoard, Allience allience) {
+    final List<Piece> activePieces = new ArrayList<>();
+    for (Tile tile : gameBoard) {
+      if (tile.isTileOccupied()) {
+        final Piece piece = tile.getPiece();
+        if (piece.getPieceAllience() == allience) {
+          activePieces.add(piece);
+        }
+      }
+    }
+
+    return ImmutableList.copyOf(activePieces);
+  }
+
+  public Tile getTile(final int tileCoordinate) {
+    return gameBoard.get(tileCoordinate);
+  }
+
+  private static List<Tile> createGameBoard(Builder builder) {
+    final Tile[] tiles = new Tile[BoardUtils.NUM_TILES];
+    for (int i = 0; i < BoardUtils.NUM_TILES; i++) {
+      tiles[i] = Tile.createTile(i, builder.boardConfig.get(i));
+    }
+    return ImmutableList.copyOf(tiles);
+  }
+
+  public static Board cearteStandardBoard() {
+    Builder builder = new Builder();
+    builder.setPiece(new Rock(0, Allience.BLACK));
+    builder.setPiece(new Knight(1, Allience.BLACK));
+    builder.setPiece(new Bishop(2, Allience.BLACK));
+    builder.setPiece(new Queen(3, Allience.BLACK));
+    builder.setPiece(new King(4, Allience.BLACK));
+    builder.setPiece(new Bishop(5, Allience.BLACK));
+    builder.setPiece(new Knight(6, Allience.BLACK));
+    builder.setPiece(new Rock(7, Allience.BLACK));
+    builder.setPiece(new Pawn(8, Allience.BLACK));
+    builder.setPiece(new Pawn(9, Allience.BLACK));
+    builder.setPiece(new Pawn(10, Allience.BLACK));
+    builder.setPiece(new Pawn(11, Allience.BLACK));
+    builder.setPiece(new Pawn(12, Allience.BLACK));
+    builder.setPiece(new Pawn(13, Allience.BLACK));
+    builder.setPiece(new Pawn(14, Allience.BLACK));
+    builder.setPiece(new Pawn(15, Allience.BLACK));
+    //white pieces
+    builder.setPiece(new Pawn(48, Allience.WHITE));
+    builder.setPiece(new Pawn(49, Allience.WHITE));
+    builder.setPiece(new Pawn(50, Allience.WHITE));
+    builder.setPiece(new Pawn(51, Allience.WHITE));
+    builder.setPiece(new Pawn(52, Allience.WHITE));
+    builder.setPiece(new Pawn(53, Allience.WHITE));
+    builder.setPiece(new Pawn(54, Allience.WHITE));
+    builder.setPiece(new Pawn(55, Allience.WHITE));
+    builder.setPiece(new Rock(56, Allience.WHITE));
+    builder.setPiece(new Knight(57, Allience.WHITE));
+    builder.setPiece(new Bishop(58, Allience.WHITE));
+    builder.setPiece(new Queen(59, Allience.WHITE));
+    builder.setPiece(new King(60, Allience.WHITE));
+    builder.setPiece(new Bishop(61, Allience.WHITE));
+    builder.setPiece(new Knight(62, Allience.WHITE));
+    builder.setPiece(new Rock(63, Allience.WHITE));
+    builder.setMoveMaker(Allience.WHITE);
+    return builder.build();
+  }
+
+  public static class Builder {
+
+    Map<Integer, Piece> boardConfig = new HashMap<>();
+    Allience nextMoveMaker;
+
+    public Builder() {
+
+    }
+
+    public Builder setPiece(final Piece piece) {
+      this.boardConfig.put(piece.getPiecePosition(), piece);
+      return this;
+    }
+
+    public Builder setMoveMaker(final Allience nextMoveMaker) {
+      this.nextMoveMaker = nextMoveMaker;
+      return this;
+    }
+
+    public Board build() {
+      return new Board(this);
+    }
+  }
+
 }
