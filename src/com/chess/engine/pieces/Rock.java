@@ -16,7 +16,7 @@ public class Rock extends Piece{
   private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = { -8, -1, 1, 8 };
 
   public Rock(int piecePosition, Allience pieceAllience) {
-    super(piecePosition, pieceAllience);
+    super(piecePosition, pieceAllience, PieceType.ROCK);
   }
 
   @Override public Collection<Move> calculateLegalMoves(Board board) {

@@ -11,10 +11,12 @@ public abstract class Piece {
   protected final int piecePosition;
   protected final Allience pieceAllience;
   protected final boolean isFirstMove;
+  private final PieceType pieceType;
 
-  public Piece(int piecePosition, Allience pieceAllience) {
+  public Piece(int piecePosition, Allience pieceAllience, PieceType pieceType) {
     this.piecePosition = piecePosition;
     this.pieceAllience = pieceAllience;
+    this.pieceType = pieceType;
     //TODO: more work here
     this.isFirstMove = false;
   }
@@ -31,6 +33,10 @@ public abstract class Piece {
 
   public Integer getPiecePosition() {
     return piecePosition;
+  }
+
+  public PieceType getPieceType() {
+    return pieceType;
   }
 
   public enum PieceType {

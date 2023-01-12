@@ -19,7 +19,7 @@ public class King extends Piece {
   private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = { -9, -8, -7, -1, 1, 7, 8, 9 };
 
   public King(final int piecePosition, final Allience pieceAllience) {
-    super(piecePosition, pieceAllience);
+    super(piecePosition, pieceAllience, PieceType.KING);
   }
 
   @Override public Collection<Move> calculateLegalMoves(final Board board) {
