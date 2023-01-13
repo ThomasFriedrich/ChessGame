@@ -15,6 +15,7 @@ import com.chess.engine.pieces.Piece;
 import com.chess.engine.pieces.Queen;
 import com.chess.engine.pieces.Rock;
 import com.chess.engine.player.BlackPlayer;
+import com.chess.engine.player.Player;
 import com.chess.engine.player.WhitePlayer;
 import com.google.common.collect.ImmutableList;
 
@@ -25,6 +26,7 @@ public class Board {
   private final Collection<Piece> blackPieces;
   private final WhitePlayer whitePlayer;
   private final BlackPlayer blackPlayer;
+  private final Player currentPlayer;
 
   private Board(Builder builder) {
 
@@ -37,6 +39,7 @@ public class Board {
 
     whitePlayer = new WhitePlayer(this, whiteStandardLegalMoves, blackStandardLegalMoves);
     blackPlayer = new BlackPlayer(this, whiteStandardLegalMoves, blackStandardLegalMoves);
+    currentPlayer = null;
 
   }
 
@@ -139,6 +142,10 @@ public class Board {
 
   public BlackPlayer getBlackPlayer() {
     return blackPlayer;
+  }
+
+  public Player getCurrentPlayer() {
+    return currentPlayer;
   }
 
   public static class Builder {
