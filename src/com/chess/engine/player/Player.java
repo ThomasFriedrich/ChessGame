@@ -104,11 +104,11 @@ public abstract class Player {
     return playersKing;
   }
 
-  protected abstract Collection<Piece> getActivePieces();
+  public abstract Collection<Piece> getActivePieces();
 
-  protected abstract Allience getAllience();
+  public abstract Allience getAllience();
 
-  protected abstract Player getOpponent();
+  public abstract Player getOpponent();
 
 }
 

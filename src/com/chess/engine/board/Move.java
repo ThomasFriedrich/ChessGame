@@ -5,12 +5,12 @@ import com.chess.engine.pieces.Piece;
 public abstract class Move {
 
   final Board board;
-  final Piece piece;
+  final Piece movedPiece;
   final int destinationCoordinate;
 
   private Move(Board board, Piece piece, int destinationCoordinate) {
     this.board = board;
-    this.piece = piece;
+    this.movedPiece = piece;
     this.destinationCoordinate = destinationCoordinate;
   }
 
@@ -27,7 +27,20 @@ public abstract class Move {
     }
 
     @Override public Board execute() {
-      return null;
+      final Board.Builder builder = new Board.Builder();
+      for (Piece piece : board.getCurrentPlayer().getActivePieces()) {
+        if(!movedPiece.equals(piece)){
+          builder.setPiece(piece);
+        }
+      }
+      for(Piece piece:board.getCurrentPlayer().getOpponent().getActivePieces()){
+        builder.setPiece(piece);
+      }
+      //move the movedPiece
+      builder.setPiece(null);
+      builder.setMoveMaker(board.getCurrentPlayer().getOpponent().getAllience());
+
+      return builder.build();
     }
   }
 
