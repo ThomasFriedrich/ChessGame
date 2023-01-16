@@ -1,6 +1,7 @@
 package com.chess.engine.pieces;
 
-import static com.chess.engine.board.Move.*;
+import static com.chess.engine.board.Move.AttackMove;
+import static com.chess.engine.board.Move.MajorMove;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -49,6 +50,10 @@ public class Bishop extends Piece {
     }
 
     return ImmutableList.copyOf(legalMoves);
+  }
+
+  @Override public Bishop movePiece(final Move move) {
+    return new Bishop(move.getDestinationCoordinate(), move.getMovedPiece().getPieceAllience());
   }
 
   private static boolean isFirstColumnExclution(final int currentPosition, final int candidateOffset) {

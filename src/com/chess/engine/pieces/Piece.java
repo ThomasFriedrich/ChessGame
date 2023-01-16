@@ -39,6 +39,8 @@ public abstract class Piece {
     return pieceType;
   }
 
+  public abstract Piece movePiece(Move move);
+
   public enum PieceType {
 
     PAWN("P"), KNIGHT("N"), BISHOP("B"), ROCK("R"), QUEEN("Q"), KING("K");

@@ -48,7 +48,9 @@ public class Rock extends Piece{
 
     return ImmutableList.copyOf(legalMoves);
   }
-
+  @Override public Rock movePiece(final Move move) {
+    return new Rock(move.getDestinationCoordinate(), move.getMovedPiece().getPieceAllience());
+  }
   private static boolean isFirstColumnExclution(final int currentPosition, final int candidateOffset) {
     return BoardUtils.FIRST_COLUMN[currentPosition] && candidateOffset == -1 ;
   }
