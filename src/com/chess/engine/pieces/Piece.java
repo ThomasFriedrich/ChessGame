@@ -1,6 +1,8 @@
 package com.chess.engine.pieces;
 
+
 import java.util.Collection;
+import java.util.Objects;
 
 import com.chess.engine.Allience;
 import com.chess.engine.board.Board;
@@ -12,6 +14,7 @@ public abstract class Piece {
   protected final Allience pieceAllience;
   protected final boolean isFirstMove;
   private final PieceType pieceType;
+  private final int cachedHashCode;
 
   public Piece(int piecePosition, Allience pieceAllience, PieceType pieceType) {
     this.piecePosition = piecePosition;
@@ -19,7 +22,10 @@ public abstract class Piece {
     this.pieceType = pieceType;
     //TODO: more work here
     this.isFirstMove = false;
+    cachedHashCode = computeHashCode();
   }
+
+
 
   public Allience getPieceAllience() {
     return pieceAllience;
@@ -56,5 +62,20 @@ public abstract class Piece {
     }
   }
 
+  @Override public boolean equals(Object o) {
+    if (this == o)
+      return true;
+    if (o == null || getClass() != o.getClass())
+      return false;
+    Piece piece = (Piece) o;
+    return piecePosition == piece.piecePosition && isFirstMove == piece.isFirstMove && pieceAllience == piece.pieceAllience && pieceType == piece.pieceType;
+  }
+
+  private int computeHashCode() {
+    return Objects.hash(piecePosition, pieceAllience, isFirstMove, pieceType);
+  }
+  @Override public int hashCode() {
+    return cachedHashCode;
+  }
 }
 
