@@ -18,6 +18,7 @@ import com.chess.engine.player.BlackPlayer;
 import com.chess.engine.player.Player;
 import com.chess.engine.player.WhitePlayer;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 
 public class Board {
 
@@ -146,6 +147,10 @@ public class Board {
 
   public Player getCurrentPlayer() {
     return currentPlayer;
+  }
+
+  public Iterable<Move> getAllLegalMoves() {
+    return Iterables.unmodifiableIterable(Iterables.concat(whitePlayer.getLegalMoves(),blackPlayer.getLegalMoves()));
   }
 
   public static class Builder {
