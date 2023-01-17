@@ -46,11 +46,11 @@ public class BlackPlayer extends Player {
                     }
                 }
             }
-            if (!this.board.getTile(0).isTileOccupied() && !this.board.getTile(1).isTileOccupied() && !this.board.getTile(2).isTileOccupied()) {
-                final Tile rockTile = this.board.getTile(3);
+            if (!this.board.getTile(1).isTileOccupied() && !this.board.getTile(2).isTileOccupied() && !this.board.getTile(3).isTileOccupied()) {
+                final Tile rockTile = this.board.getTile(0);
                 if (rockTile.isTileOccupied() && rockTile.getPiece().isFirstMove()) {
-                    if (Player.calculateAttackOnTile(0, opponentLegals).isEmpty() && Player.calculateAttackOnTile(1, opponentLegals).isEmpty()
-                        && Player.calculateAttackOnTile(2, opponentLegals).isEmpty()
+                    if (Player.calculateAttackOnTile(1, opponentLegals).isEmpty() && Player.calculateAttackOnTile(2, opponentLegals).isEmpty()
+                        && Player.calculateAttackOnTile(3, opponentLegals).isEmpty()
                         && rockTile.getPiece().getPieceType() == Piece.PieceType.ROCK) {
                         kingCastles.add(null);
                     }
