@@ -32,7 +32,7 @@ public abstract class Player {
    * @param moves
    * @return
    */
-  private static Collection<Move> calculateAttackOnTile(Integer piecePosition, Collection<Move> moves) {
+  protected static Collection<Move> calculateAttackOnTile(Integer piecePosition, Collection<Move> moves) {
     List<Move> attackMoves = new ArrayList<>();
     for (Move move : moves) {
       if (piecePosition == move.getDestinationCoordinate()) {
@@ -103,12 +103,11 @@ public abstract class Player {
   private Piece getPlayerKing() {
     return playersKing;
   }
-
   public abstract Collection<Piece> getActivePieces();
-
   public abstract Allience getAllience();
-
   public abstract Player getOpponent();
+
+  protected abstract Collection<Move> calculateKingCastles(Collection<Move> playerLegals, Collection<Move> opponentLegals);
 
 }
 

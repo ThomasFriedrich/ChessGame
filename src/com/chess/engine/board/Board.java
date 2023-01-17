@@ -157,6 +157,7 @@ public class Board {
 
     Map<Integer, Piece> boardConfig = new HashMap<>();
     Allience nextMoveMaker;
+    Pawn enPassentPawn;
 
     public Builder() {
 
@@ -175,6 +176,11 @@ public class Board {
     public Board build() {
       return new Board(this);
     }
+
+    public void setEnPassentPawn(Pawn enPassentPawn) {
+      this.enPassentPawn = enPassentPawn;
+    }
+
   }
 
 }
