@@ -1,5 +1,7 @@
 package com.chess.engine.player;
 
+import static com.chess.engine.board.Move.*;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -9,6 +11,7 @@ import com.chess.engine.board.Board;
 import com.chess.engine.board.Move;
 import com.chess.engine.board.Tile;
 import com.chess.engine.pieces.Piece;
+import com.chess.engine.pieces.Rock;
 import com.google.common.collect.ImmutableList;
 
 public class WhitePlayer extends Player {
@@ -42,17 +45,18 @@ public class WhitePlayer extends Player {
         if (rockTile.isTileOccupied() && rockTile.getPiece().isFirstMove()) {
           if (Player.calculateAttackOnTile(61, opponentLegals).isEmpty() && Player.calculateAttackOnTile(62, opponentLegals).isEmpty()
               && rockTile.getPiece().getPieceType() == Piece.PieceType.ROCK) {
-            kingCastles.add(null);
+            kingCastles.add(new KingSideCastleMove(board,playersKing,62,(Rock)rockTile.getPiece(),rockTile.getTileCoordinate(),61));
           }
         }
       }
+      //white queen side castle
       if (!this.board.getTile(59).isTileOccupied() && !this.board.getTile(58).isTileOccupied() && !this.board.getTile(57).isTileOccupied()) {
         final Tile rockTile = this.board.getTile(56);
         if (rockTile.isTileOccupied() && rockTile.getPiece().isFirstMove()) {
           if (Player.calculateAttackOnTile(59, opponentLegals).isEmpty() && Player.calculateAttackOnTile(58, opponentLegals).isEmpty()
               && Player.calculateAttackOnTile(57, opponentLegals).isEmpty()
               && rockTile.getPiece().getPieceType() == Piece.PieceType.ROCK) {
-            kingCastles.add(null);
+            kingCastles.add(new QueenSideCastleMove(board,playersKing,58,(Rock)rockTile.getPiece(),rockTile.getTileCoordinate(),59));
           }
         }
 

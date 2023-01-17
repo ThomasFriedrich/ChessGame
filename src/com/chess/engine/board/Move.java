@@ -206,7 +206,7 @@ public abstract class Move {
 
   public static final class KingSideCastleMove extends CastleMove {
 
-    private KingSideCastleMove(Board board, Piece piece, int destinationCoordinate,final Rock castleRock, final int castleRockStart, final int castleRockDestination ) {
+    public KingSideCastleMove(Board board, Piece piece, int destinationCoordinate, final Rock castleRock, final int castleRockStart, final int castleRockDestination) {
       super(board, piece, destinationCoordinate, castleRock, castleRockStart, castleRockDestination);
     }
 
@@ -217,7 +217,7 @@ public abstract class Move {
 
   public static final class QueenSideCastleMove extends CastleMove {
 
-    private QueenSideCastleMove(Board board, Piece piece, int destinationCoordinate,final Rock castleRock, final int castleRockStart, final int castleRockDestination) {
+    public QueenSideCastleMove(Board board, Piece piece, int destinationCoordinate, final Rock castleRock, final int castleRockStart, final int castleRockDestination) {
       super(board, piece, destinationCoordinate, castleRock, castleRockStart, castleRockDestination);
     }
     @Override public String toString() {
