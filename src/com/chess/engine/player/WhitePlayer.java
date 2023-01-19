@@ -54,7 +54,6 @@ public class WhitePlayer extends Player {
         final Tile rockTile = this.board.getTile(56);
         if (rockTile.isTileOccupied() && rockTile.getPiece().isFirstMove()) {
           if (Player.calculateAttackOnTile(59, opponentLegals).isEmpty() && Player.calculateAttackOnTile(58, opponentLegals).isEmpty()
-              && Player.calculateAttackOnTile(57, opponentLegals).isEmpty()
               && rockTile.getPiece().getPieceType() == Piece.PieceType.ROCK) {
             kingCastles.add(new QueenSideCastleMove(board,playersKing,58,(Rock)rockTile.getPiece(),rockTile.getTileCoordinate(),59));
           }
