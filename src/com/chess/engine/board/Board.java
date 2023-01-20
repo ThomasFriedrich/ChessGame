@@ -32,14 +32,14 @@ public class Board {
   private Board(Builder builder) {
 
     gameBoard = createGameBoard(builder);
-    blackPieces = calculateActivePieces(this.gameBoard, Allience.WHITE);
-    whitePieces = calculateActivePieces(this.gameBoard, Allience.BLACK);
+    blackPieces = calculateActivePieces(this.gameBoard, Allience.BLACK);
+    whitePieces = calculateActivePieces(this.gameBoard, Allience.WHITE);
 
     final Collection<Move> whiteStandardLegalMoves = calculateLegalMoves(whitePieces);
     final Collection<Move> blackStandardLegalMoves = calculateLegalMoves(blackPieces);
 
     whitePlayer = new WhitePlayer(this, whiteStandardLegalMoves, blackStandardLegalMoves);
-    blackPlayer = new BlackPlayer(this, whiteStandardLegalMoves, blackStandardLegalMoves);
+    blackPlayer = new BlackPlayer(this,  blackStandardLegalMoves,whiteStandardLegalMoves);
     currentPlayer = builder.nextMoveMaker.choosePlayer(whitePlayer,blackPlayer);
 
   }
